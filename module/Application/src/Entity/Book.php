@@ -12,10 +12,13 @@ use Doctrine\Common\Collections\ArrayCollection;
 class Book
 {
     /**
-     * @ORM\ManyToOne(targetEntity="\Application\Entity\Post", inversedBy="comments")
-     * @ORM\JoinColumn(name="post_id", referencedColumnName="id")
+     * @ORM\ManyToMany(targetEntity="\Application\Entity\Library", inversedBy="books")
+     * @ORM\JoinTable(name="library_book",
+     *      joinColumns={@ORM\JoinColumn(name="library_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="book_id", referencedColumnName="id")}
+     *      )
      */
-    protected $library;
+    protected $librarys;
 
     // Book status constants.
     const STATUS_IN_STOCK       = 1; // In_stock.
@@ -87,9 +90,14 @@ class Book
      * Sets associated Library.
      * @param \Application\Entity\Library $library
      */
-    public function setLibrary($library)
+    public function addLibrary($library)
     {
-        $this->library = $library;
-        $library->addBook($this);
+        $this->librarys[] = $library;
+    }
+
+    // Removes association between this Book and the given Library.
+    public function removeLibraryAssociation($library)
+    {
+        $this->librarys->removeElement($library);
     }
 }

@@ -25,7 +25,7 @@ class Library
     protected $name;
 
     /**
-    * @ORM\OneToMany(targetEntity="\Application\Entity\Book", mappedBy="book")
+    * @ORM\ManyToMany(targetEntity="\Application\Entity\Book", mappedBy="book")
     * @ORM\JoinColumn(name="id", referencedColumnName="book_id")
     */
     protected $books;
@@ -74,7 +74,7 @@ class Library
      * Adds a new book to this library.
      * @param $book
      */
-    public function addComment($book)
+    public function addBook($book)
     {
         $this->books[] = $book;
     }

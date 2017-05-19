@@ -12,8 +12,17 @@ use Zend\View\Model\ViewModel;
 
 class IndexController extends AbstractActionController
 {
+
     public function indexAction()
     {
-        return new ViewModel();
+        return new ViewModel(); // display standard index page
+    }
+
+    public function helloAction()
+    {
+        $request = $this->getRequest();
+
+        $name = $request->getParam('name', 'unknown');
+        return 'Hello ' . $name;
     }
 }

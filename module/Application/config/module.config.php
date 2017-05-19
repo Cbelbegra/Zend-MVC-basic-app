@@ -57,4 +57,19 @@ return [
             __DIR__ . '/../view',
         ],
     ],
+    'console' => [
+        'router' => [
+            'routes' => [
+                'list-users' => [
+                    'options' => [
+                        'route'    => 'hello-world [--name=:name]',
+                        'defaults' => [
+                            'controller' => Controller\IndexController::class,
+                            'action'     => 'hello',
+                        ],
+                    ],
+                ],
+            ],
+        ],
+    ],
 ];
